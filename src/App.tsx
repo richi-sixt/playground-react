@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import viteLogo from './assets/vite.svg';
 import './App.css';
 
 interface SquareProps {
@@ -38,19 +37,20 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Gewinner: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : '0');
+    status = 'Nächster Spieler: ' + (xIsNext ? 'X' : '0');
   }
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
+        <img
+          src="src/assets/tic-tac-toe-game.svg"
+          className="logo"
+          alt="logo"
+        />
       </div>
-      <h1>Tic Tac Toe</h1>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -93,9 +93,9 @@ export default function Game() {
   const moves = history.map((_squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Gehe zum Zug #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Spiel neu starten';
     }
     return (
       <li key={move}>
