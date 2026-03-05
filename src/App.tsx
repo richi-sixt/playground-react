@@ -1,6 +1,13 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
+import viteLogo from './assets/vite.svg';
+import './App.css';
 
-function Square({ value, onSquareClick }) {
+interface SquareProps {
+  value: string | null;
+  onSquareClick: () => void;
+}
+
+function Square({ value, onSquareClick }: SquareProps) {
   return (
     <button className="square" onClick={onSquareClick}>
       {value}
@@ -8,8 +15,14 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-function Board({ xIsNext, squares, onPlay }) {
-  function handleClick(i) {
+interface BoardProps {
+  xIsNext: boolean;
+  squares: (string | null)[];
+  onPlay: (squares: (string | null)[]) => void;
+}
+
+function Board({ xIsNext, squares, onPlay }: BoardProps) {
+  function handleClick(i: number): void {
     if (squares[i] || calculateWinner(squares)) {
       return;
     }
@@ -32,6 +45,12 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+      </div>
+      <h1>Tic Tac Toe</h1>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -53,23 +72,25 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 export default function Game() {
-  const [history, setHistory] = useState([Array(0).fill(null)]);
+  const [history, setHistory] = useState<(string | null)[][]>([
+    Array(0).fill(null),
+  ]);
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
-  function handlePlay(nextSquares) {
+  function handlePlay(nextSquares: (string | null)[]): void {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     console.log(nextHistory);
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove) {
+  function jumpTo(nextMove: number): void {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((squares, move) => {
+  const moves = history.map((_squares, move) => {
     let description;
     if (move > 0) {
       description = 'Go to move #' + move;
@@ -107,8 +128,8 @@ export default function Game() {
  *   horizontally, vertically, or diagonally; otherwise returns null
  *   if there is currently no winner.
  */
-function calculateWinner(squares) {
-  const lines = [
+function calculateWinner(squares: (string | null)[]): string | null {
+  const lines: number[][] = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
