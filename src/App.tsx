@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logo from './assets/tic-tac-toe-game.svg';
 import './App.css';
 
 interface SquareProps {
@@ -45,11 +46,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
   return (
     <>
       <div>
-        <img
-          src="src/assets/tic-tac-toe-game.svg"
-          className="logo"
-          alt="logo"
-        />
+        <img src={logo} className="logo" alt="logo" />
       </div>
       <div className="status">{status}</div>
       <div className="board-row">
