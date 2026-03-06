@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from './assets/tic-tac-toe-game.svg';
+import logo from '/tic-tac-toe-game.svg';
 import './App.css';
 
 interface SquareProps {
