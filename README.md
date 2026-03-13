@@ -1,3 +1,6 @@
+> **Info:**
+> Migrated to [react-playground / Next.js](https://github.com/richi-sixt/react-playground)
+
 # Start Learning React
 
 First steps with [tic-tac-toe tutorial](https://react.dev/learn/tutorial-tic-tac-toe)
